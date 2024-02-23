@@ -22,7 +22,7 @@ public class BoardBuilder {
         return this;
     }
 
-    public BoardDTO board(String title, String content, String writer) {
+    public BoardDTO build() {
         return new BoardDTO(title, content, writer);
     }
 }

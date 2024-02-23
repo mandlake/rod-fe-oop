@@ -1,9 +1,18 @@
 package model;
 
 public class BoardDTO {
-    private String title;
-    private String content;
-    private String writer;
+    private final String title;
+    private final String content;
+    private final String writer;
+
+    @Override
+    public String toString() {
+        return "BoardDTO{" +
+                "title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", writer='" + writer + '\'' +
+                '}';
+    }
 
     public BoardDTO(String title, String content, String writer) {
         this.title = title;
