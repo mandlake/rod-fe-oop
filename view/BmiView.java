@@ -17,13 +17,12 @@ public class BmiView {
 
         BmiService service = BmiServiceImpl.getInstance();
 
-        double bmi = service.createBmi();
-        String bodyMass = service.createBodyMass();
+        String bmi = service.createBmi(person);
+        String bodyMass = service.createBodyMass(Double.parseDouble(bmi));
 
-        System.out.printf("키: %.1f, 몸무게: %.1f ", person.getHeight(), person.getWeight());
-        System.out.printf("BMI: %.1f ", bmi);
-
-        System.out.println("체질량: " + bodyMass);
+        System.out.print(" ============= BMI ==============\n"
+                + "BMI: " + bmi + "\n"
+                + "체질량: " + bodyMass);
 
     }
 }

@@ -1,7 +1,7 @@
 package serviceImpl;
 
+import model.SubjectDTO;
 import service.GradeService;
-import service.UtilService;
 
 public class GradeServiceImpl implements GradeService {
 
@@ -14,12 +14,12 @@ public class GradeServiceImpl implements GradeService {
     }
 
     @Override
-    public int createTotalScore() {
-        return 0;
+    public int createTotalScore(SubjectDTO subject) {
+        return subject.getEnglish() + subject.getKorea() + subject.getMath();
     }
 
     @Override
-    public double createAverage() {
-        return 0;
+    public double createAverage(SubjectDTO subject) {
+        return (double) (subject.getEnglish() + subject.getKorea() + subject.getMath()) /3;
     }
 }

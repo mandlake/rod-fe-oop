@@ -11,6 +11,7 @@ public class AutoServiceImpl implements AutoService {
     public static AutoService getInstance() {
         return instance;
     }
+
     @Override
     public String join() {
         return null;
