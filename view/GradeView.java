@@ -12,8 +12,8 @@ import serviceImpl.UtilServiceImpl;
 import java.util.Scanner;
 
 public class GradeView {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+    public static void grade(Scanner sc) {
+        sc = new Scanner(System.in);
 
         System.out.println("이름, 국어, 영어, 수학점수 : ");
         UtilService random = UtilServiceImpl.getInstance();

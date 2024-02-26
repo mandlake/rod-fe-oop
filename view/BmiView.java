@@ -8,7 +8,7 @@ import serviceImpl.BmiServiceImpl;
 import serviceImpl.UtilServiceImpl;
 
 public class BmiView {
-    public static void main(String[] args) {
+    public static void bmi() {
         UtilService random = UtilServiceImpl.getInstance();
         MemberDTO person = new MemberBuilder()
                 .height(random.createRandomDouble(150, 50))
