@@ -3,7 +3,7 @@ package builder;
 import model.MemberDTO;
 
 public class MemberBuilder {
-    private String id;
+    private String username;
     private String pw;
     private String pwAgain;
     private String name;
@@ -14,8 +14,8 @@ public class MemberBuilder {
     private double height;
     private double weight;
 
-    public MemberBuilder id(String id) {
-        this.id = id;
+    public MemberBuilder username(String username) {
+        this.username = username;
         return this;
     }
 
@@ -65,6 +65,6 @@ public class MemberBuilder {
     }
 
     public MemberDTO build() {
-        return new MemberDTO(id, pw, pwAgain, name, personId, phoneNumber, address, job, height, weight);
+        return new MemberDTO(username, pw, pwAgain, name, personId, phoneNumber, address, job, height, weight);
     }
 }

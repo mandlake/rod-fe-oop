@@ -4,6 +4,7 @@ import model.MemberDTO;
 import model.SubjectDTO;
 
 public class SubjectBuilder {
+    private long id;
     private int korea;
     private int english;
     private int math;

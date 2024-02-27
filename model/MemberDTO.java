@@ -1,7 +1,7 @@
 package model;
 
 public class MemberDTO {
-    private final String id;
+    private final String username;
     private final String pw;
     private final String pwAgain;
     private final String name;
@@ -12,8 +12,8 @@ public class MemberDTO {
     private final double height;
     private final double weight;
 
-    public String getId() {
-        return id;
+    public String getUsername() {
+        return username;
     }
 
     public String getPw() {
@@ -55,7 +55,7 @@ public class MemberDTO {
     @Override
     public String toString() {
         return "MemberDTO{" +
-                "id='" + id + '\'' +
+                "username='" + username + '\'' +
                 ", pw='" + pw + '\'' +
                 ", pwAgain='" + pwAgain + '\'' +
                 ", name='" + name + '\'' +
@@ -68,8 +68,8 @@ public class MemberDTO {
                 '}';
     }
 
-    public MemberDTO(String id, String pw, String pwAgain, String name, String personId, String phoneNumber, String address, String job, double height, double weight) {
-        this.id = id;
+    public MemberDTO(String username, String pw, String pwAgain, String name, String personId, String phoneNumber, String address, String job, double height, double weight) {
+        this.username = username;
         this.pw = pw;
         this.pwAgain = pwAgain;
         this.name = name;

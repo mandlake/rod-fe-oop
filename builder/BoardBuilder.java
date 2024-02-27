@@ -3,6 +3,7 @@ package builder;
 import model.BoardDTO;
 
 public class BoardBuilder {
+    private long id;
     private String title;
     private String content;
     private String writer;

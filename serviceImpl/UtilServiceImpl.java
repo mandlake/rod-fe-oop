@@ -62,4 +62,17 @@ public class UtilServiceImpl implements UtilService {
         String[] companies = {"Google", "엔비디아", "메타", "삼성", "LG", "Apple"};
         return companies[createRandomInteger(0, companies.length)];
     }
+
+    @Override
+    public String createRandomUserName() {
+//        String username = "";
+//        for(;
+//            username.length() < 5;
+//            username += String.valueOf((char)('a' + this.createRandomInteger(0, 26))));
+//        return username;
+
+         String[] usernames = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
+         return usernames[createRandomInteger(0, usernames.length)];
+
+    }
 }

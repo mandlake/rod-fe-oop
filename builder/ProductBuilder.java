@@ -3,6 +3,7 @@ package builder;
 import model.ProductDTO;
 
 public class ProductBuilder {
+    private long id;
     private int pno;
     private String name;
     private String company;
