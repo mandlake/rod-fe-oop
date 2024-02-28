@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class MemberView {
     public static void memberView(Scanner sc) {
         MemberController ctrl = new MemberController();
-        ctrl.addMembers();
+        System.out.println(ctrl.addMembers());
         String username = "";
         while (true) {
             System.out.println("[메뉴] " +
@@ -20,15 +20,20 @@ public class MemberView {
                     return;
                 case "1":
                     System.out.println("=== 회원가입 ===");
+                    System.out.println("ID, 비밀번호, 이름, 주민번호," +
+                            " 전화번호, 주소, 직업을 입력해주세요");
                     ctrl.join(sc);
                     break;
                 case "2":
                     System.out.println("=== 로그인 ===");
-                    username = ctrl.login(sc);
+                    System.out.println("아이디와 비밀번호를 입력하세요.");
+                    System.out.println(ctrl.login(sc));
+
                     break;
                 case "3":
                     System.out.println("=== 회원정보 ===");
-                    ctrl.findMemberByID(sc);
+                    System.out.println("찾고 싶은 ID를 입력하세요.");
+                    System.out.println(ctrl.findMemberByID(sc));
                     break;
                 case "4":
                     System.out.println("=== 비번변경 ===");

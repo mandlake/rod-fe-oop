@@ -1,12 +1,14 @@
 package service;
 
+import model.MemberDTO;
+
 import java.util.Scanner;
 
 public interface MemberService {
-    void addMembers();
-    String join(Scanner sc);
-    String login(Scanner sc);
-    void findMemberById(Scanner sc);
+    String addMembers();
+    String join(MemberDTO member);
+    String login(String username, String pw);
+    String findMemberById(String username);
     void updatePassword(String username, Scanner sc);
     void deleteMember(Scanner sc);
     void getMemberList();

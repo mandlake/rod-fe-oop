@@ -20,7 +20,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public void addMembers() {
+    public String addMembers() {
         UtilService util = UtilServiceImpl.getInstance();
         for(int i = 0; i < 5; i++) {
             String username = util.createRandomUserName();
@@ -41,51 +41,37 @@ public class MemberServiceImpl implements MemberService {
                             .job(job)
                             .build());
         }
-        System.out.println(users.size() + "명의 회원이 생성되었습니다.");
+        return users.size() + "명의 회원이 생성되었습니다.";
     }
     @Override
-    public String join(Scanner sc) {
-        System.out.println("ID, 비밀번호, 이름, 주민번호," +
-                " 전화번호, 주소, 직업을 입력해주세요");
-        MemberDTO member = new MemberBuilder()
-                .username(sc.next())
-                .pw(sc.next())
-                .name(sc.next())
-                .personId(sc.next())
-                .phoneNumber(sc.next())
-                .address(sc.next())
-                .job(sc.next())
-                .build();
+    public String join(MemberDTO member) {
         users.put(member.getUsername(), member);
         return member.toString();
     }
 
     @Override
-    public String login(Scanner sc) {
-        System.out.println("아이디를 입력하세요.");
-        String username = sc.next();
-        System.out.println("비밀번호를 입력하세요");
-        String pw = sc.next();
+    public String login(String username, String pw) {
+        String successLogin;
         if(users.get(username) == null) {
-            System.out.println("로그인에 실패했습니다.");
+            successLogin = "로그인에 실패했습니다.";
         } else if(Objects.equals(users.get(username).getPw(), pw)) {
-            System.out.println(users.get(username).getName() + "님께서 로그인하셨습니다.");
+            successLogin = users.get(username).getName() + "님께서 로그인하셨습니다.";
         } else {
-            System.out.println("비밀번호가 틀렸습니다.");
+            successLogin = "비밀번호가 틀렸습니다.";
         }
-        return username;
+        return successLogin;
     }
 
     @Override
-    public void findMemberById(Scanner sc) {
-        System.out.println("찾고 싶은 ID를 입력하세요.");
-        String username = sc.next();
+    public String findMemberById(String username) {
         MemberDTO user = users.get(username);
+        String Mem;
         if(user == null) {
-            System.out.println(username + "에 해당하는 정보가 없습니다.");
+            Mem = username + "에 해당하는 정보가 없습니다.";
         } else {
-            System.out.println(user);
+            Mem = user.toString();
         }
+        return Mem;
     }
 
     @Override

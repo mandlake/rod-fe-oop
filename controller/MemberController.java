@@ -1,5 +1,7 @@
 package controller;
 
+import builder.MemberBuilder;
+import model.MemberDTO;
 import service.MemberService;
 import serviceImpl.MemberServiceImpl;
 
@@ -12,20 +14,33 @@ public class MemberController {
         this.member = MemberServiceImpl.getInstance();
     }
 
-    public void addMembers() {
-        member.addMembers();
+    public String addMembers() {
+        return member.addMembers();
     }
 
     public String join(Scanner sc) {
-        return member.join(sc);
+        MemberDTO mem = new MemberBuilder()
+                .username(sc.next())
+                .pw(sc.next())
+                .name(sc.next())
+                .personId(sc.next())
+                .phoneNumber(sc.next())
+                .address(sc.next())
+                .job(sc.next())
+                .build();
+
+        return member.join(mem);
     }
 
     public String login(Scanner sc) {
-        return member.login(sc);
+        String username = sc.next();
+        String pw = sc.next();
+        return member.login(username, pw);
     }
 
-    public void findMemberByID(Scanner sc) {
-        member.findMemberById(sc);
+    public String findMemberByID(Scanner sc) {
+        String username = sc.next();
+        return member.findMemberById(username);
     }
 
     public void updatePassword(String username, Scanner sc) {
