@@ -57,14 +57,11 @@ public class MemberDTO {
         return "MemberDTO{" +
                 "username='" + username + '\'' +
                 ", pw='" + pw + '\'' +
-                ", pwAgain='" + pwAgain + '\'' +
                 ", name='" + name + '\'' +
                 ", personId='" + personId + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", address='" + address + '\'' +
-                ", job='" + job + '\'' +
-                ", height=" + height +
-                ", weight=" + weight +
+                ", job='" + job +
                 '}';
     }
 

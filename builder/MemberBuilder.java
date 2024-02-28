@@ -13,7 +13,7 @@ public class MemberBuilder {
     private String job;
     private double height;
     private double weight;
-
+    
     public MemberBuilder username(String username) {
         this.username = username;
         return this;

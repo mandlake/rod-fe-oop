@@ -1,6 +1,5 @@
 package controller;
 
-import model.MemberDTO;
 import service.MemberService;
 import serviceImpl.MemberServiceImpl;
 
@@ -9,30 +8,47 @@ import java.util.*;
 public class MemberController {
     private final MemberService member;
 
-    private Map<String, MemberDTO> users;
-
     public MemberController() {
         this.member = MemberServiceImpl.getInstance();
-        this.users = new HashMap<>();
     }
 
     public void addMembers() {
-        this.users = member.addMembers();
-    }
-
-    public MemberDTO findMember(String username) {
-        return member.findMemberById(username);
+        member.addMembers();
     }
 
     public String join(Scanner sc) {
         return member.join(sc);
     }
 
-    public Map<String, MemberDTO> findMembers() {
-        return member.getMemberList();
+    public String login(Scanner sc) {
+        return member.login(sc);
     }
 
-    public String countMembers() {
-        return member.countMembers();
+    public void findMemberByID(Scanner sc) {
+        member.findMemberById(sc);
+    }
+
+    public void updatePassword(String username, Scanner sc) {
+        member.updatePassword(username, sc);
+    }
+
+    public void deleteMember(Scanner sc) {
+        member.deleteMember(sc);
+    }
+
+    public void getMemberList() {
+        member.getMemberList();
+    }
+
+    public void findMembersByName(Scanner sc) {
+        member.findMembersByName(sc);
+    }
+
+    public void findMembersByJob(Scanner sc) {
+        member.findMembersByJob(sc);
+    }
+
+    public void countMembers() {
+        member.countMembers();
     }
 }
