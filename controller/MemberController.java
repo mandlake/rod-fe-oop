@@ -18,7 +18,7 @@ public class MemberController {
         return member.addMembers();
     }
 
-    public String join(Scanner sc) {
+    public Map<String, MemberDTO> join(Scanner sc) {
         MemberDTO mem = new MemberBuilder()
                 .username(sc.next())
                 .pw(sc.next())
@@ -32,7 +32,7 @@ public class MemberController {
         return member.join(mem);
     }
 
-    public String login(Scanner sc) {
+    public String[] login(Scanner sc) {
         String username = sc.next();
         String pw = sc.next();
         return member.login(username, pw);
@@ -44,26 +44,29 @@ public class MemberController {
     }
 
     public void updatePassword(String username, Scanner sc) {
-        member.updatePassword(username, sc);
+        String pw = sc.next();
+        member.updatePassword(username, pw);
     }
 
-    public void deleteMember(Scanner sc) {
-        member.deleteMember(sc);
+    public String deleteMember(String username) {
+        return member.deleteMember(username);
     }
 
-    public void getMemberList() {
-        member.getMemberList();
+    public List<String> getMemberList() {
+        return member.getMemberList();
     }
 
-    public void findMembersByName(Scanner sc) {
-        member.findMembersByName(sc);
+    public List<String> findMembersByName(Scanner sc) {
+        String name = sc.next();
+        return member.findMembersByName(name);
     }
 
-    public void findMembersByJob(Scanner sc) {
-        member.findMembersByJob(sc);
+    public List<String> findMembersByJob(Scanner sc) {
+        String job = sc.next();
+        return member.findMembersByJob(job);
     }
 
-    public void countMembers() {
-        member.countMembers();
+    public String countMembers() {
+        return member.countMembers();
     }
 }

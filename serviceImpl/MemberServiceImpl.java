@@ -1,6 +1,7 @@
 package serviceImpl;
 
 import builder.MemberBuilder;
+import lombok.Getter;
 import model.MemberDTO;
 import service.MemberService;
 import service.UtilService;
@@ -8,15 +9,12 @@ import service.UtilService;
 import java.util.*;
 
 public class MemberServiceImpl implements MemberService {
-
-    private static final MemberService instance = new MemberServiceImpl();
     Map<String, MemberDTO> users;
+
+    @Getter
+    private static final MemberService instance = new MemberServiceImpl();
     private MemberServiceImpl(){
         this.users = new HashMap<>();
-    }
-
-    public static MemberService getInstance() {
-        return instance;
     }
 
     @Override
@@ -44,20 +42,21 @@ public class MemberServiceImpl implements MemberService {
         return users.size() + "명의 회원이 생성되었습니다.";
     }
     @Override
-    public String join(MemberDTO member) {
+    public Map<String, MemberDTO> join(MemberDTO member) {
         users.put(member.getUsername(), member);
-        return member.toString();
+        return users;
     }
 
     @Override
-    public String login(String username, String pw) {
-        String successLogin;
+    public String[] login(String username, String pw) {
+        String[] successLogin = new String[2];
         if(users.get(username) == null) {
-            successLogin = "로그인에 실패했습니다.";
+            successLogin[1] = "로그인에 실패했습니다.";
         } else if(Objects.equals(users.get(username).getPw(), pw)) {
-            successLogin = users.get(username).getName() + "님께서 로그인하셨습니다.";
+            successLogin[0] = username;
+            successLogin[1] = users.get(username).getName() + "님께서 로그인하셨습니다.";
         } else {
-            successLogin = "비밀번호가 틀렸습니다.";
+            successLogin[1] = "비밀번호가 틀렸습니다.";
         }
         return successLogin;
     }
@@ -75,7 +74,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public void updatePassword(String username, Scanner sc) {
+    public void updatePassword(String username, String pw) {
         MemberDTO userWillChanged = users.get(username);
         String name = userWillChanged.getName();
         String personID = userWillChanged.getPersonId();
@@ -85,69 +84,65 @@ public class MemberServiceImpl implements MemberService {
         users.put(username,
                 new MemberBuilder()
                         .username(username)
-                        .pw(sc.next())
+                        .pw(pw)
                         .name(name)
                         .personId(personID)
                         .phoneNumber(phoneNum)
                         .address(address)
                         .job(job)
                         .build());
-        System.out.println("비밀번호 변경이 완료되었습니다.");
     }
 
     @Override
-    public void deleteMember(Scanner sc) {
-        System.out.println("탈퇴를 원하는 ID를 입력하세요.");
-        String username = sc.next();
-        if(users.get(username) == null) {
-            System.out.println(username + "에 해당하는 정보가 없습니다.");
-        } else {
-            users.remove(username);
-            System.out.println(username + "이 탈퇴하였습니다.");
-        }
+    public String deleteMember(String username) {
+        users.remove(username);
+        return username + "이 탈퇴하였습니다.\n안녕히가세요.";
     }
 
     @Override
-    public void getMemberList() {
+    public List<String> getMemberList() {
+        List<String> mem = new ArrayList<>();
         if (users.isEmpty()) {
-            System.out.println("안에 아무 정보도 없습니다.");
+            mem.add("안에 아무 정보도 없습니다.");
         } else {
-            users.forEach((k, v) -> System.out.println("{" + k + ", " + v + "}"));
+            // List<MemberDTO> mem = new ArrayList<>(users.values());처럼 써도 됨.
+            users.forEach((k, v) -> mem.add("{" + k + ", " + v + "}"));
         }
+        return mem;
     }
 
     @Override
-    public void findMembersByName(Scanner sc) {
+    public List<String> findMembersByName(String name) {
+        List<String> mem = new ArrayList<>();
         if (users.isEmpty()) {
-            System.out.println("안에 아무 정보도 없습니다.");
+            mem.add("해당 이름에 해당하는 정보가 없습니다.");
         } else {
-            System.out.println("찾고 싶은 이름을 입력하세요.");
-            String name = sc.next();
             users.forEach((k, v) -> {
                 if(Objects.equals(v.getName(), name)) {
-                    System.out.println("{" + k + ", " + v + "}");
+                    mem.add("{" + k + ", " + v + "}");
                 }
             });
         }
+        return mem;
     }
 
     @Override
-    public void findMembersByJob(Scanner sc) {
+    public List<String> findMembersByJob(String job) {
+        List<String> mem = new ArrayList<>();
         if (users.isEmpty()) {
-            System.out.println("해당 직업에 해당하는 정보가 없습니다.");
+            mem.add("해당 직업에 해당하는 정보가 없습니다.");
         } else {
-            System.out.println("찾고 싶은 직업을 입력하세요.");
-            String job = sc.next();
             users.forEach((k, v) -> {
                 if(Objects.equals(v.getJob(), job)) {
-                    System.out.println("{" + k + ", " + v + "}");
+                    mem.add("{" + k + ", " + v + "}");
                 }
             });
         }
+        return mem;
     }
 
     @Override
-    public void countMembers() {
-        System.out.println("회원 수는 " + users.size() + "명 입니다.");
+    public String countMembers() {
+        return "회원 수는 " + users.size() + "명 입니다.";
     }
 }

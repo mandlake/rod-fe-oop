@@ -2,10 +2,20 @@ package view;
 
 import controller.MemberController;
 
-import java.util.Objects;
 import java.util.Scanner;
 
 public class MemberView {
+    public static String login(String username, MemberController ctrl, Scanner sc) {
+        System.out.println("아이디와 비밀번호를 입력하세요.");
+        String[] login = ctrl.login(sc);
+        System.out.println(login[1]);
+        if(login[0] != null) {
+            username = login[0];
+        } else {
+            System.out.println("다시 로그인하세요.");
+        }
+        return username;
+    }
     public static void memberView(Scanner sc) {
         MemberController ctrl = new MemberController();
         System.out.println(ctrl.addMembers());
@@ -26,9 +36,7 @@ public class MemberView {
                     break;
                 case "2":
                     System.out.println("=== 로그인 ===");
-                    System.out.println("아이디와 비밀번호를 입력하세요.");
-                    System.out.println(ctrl.login(sc));
-
+                    username = login(username, ctrl, sc);
                     break;
                 case "3":
                     System.out.println("=== 회원정보 ===");
@@ -37,31 +45,41 @@ public class MemberView {
                     break;
                 case "4":
                     System.out.println("=== 비번변경 ===");
-                    if(Objects.equals(username, "")) {
-                        System.out.println("비번 변경을 원하는 아이디를 입력하세요.");
-                        username = sc.next();
+                    if(username.isEmpty()) {
+                        System.out.println("로그인을 먼저 하셔야 합니다.");
+                        username = login(username, ctrl, sc);
                     }
+                    System.out.println("바꿀 비밀번호를 입력하세요.");
                     ctrl.updatePassword(username, sc);
+                    System.out.println("비밀번호 변경이 완료되었습니다.");
                     break;
                 case "5":
                     System.out.println("=== 탈퇴 ===");
-                    ctrl.deleteMember(sc);
+                    if(username.isEmpty()) {
+                        username = login(username, ctrl, sc);
+                    }
+                    System.out.println(ctrl.deleteMember(username));
+                    username = "";
                     break;
                 case "6":
                     System.out.println("=== 회원목록 ===");
-                    ctrl.getMemberList();
+                    for (String mem: ctrl.getMemberList()) {
+                        System.out.println(mem);
+                    }
                     break;
                 case "7":
                     System.out.println("=== 이름검색 ===");
-                    ctrl.findMembersByName(sc);
+                    System.out.println("이름을 입력하세요.");
+                    ctrl.findMembersByName(sc).forEach(System.out::println);
                     break;
                 case "8":
                     System.out.println("=== 직업검색 ===");
-                    ctrl.findMembersByJob(sc);
+                    System.out.println("찾고 싶은 직업을 입력하세요.");
+                    ctrl.findMembersByJob(sc).forEach(System.out::println);
                     break;
                 case "9":
                     System.out.println("=== 회원수 ===");
-                    ctrl.countMembers();
+                    System.out.println(ctrl.countMembers());
                     break;
                 default:
                     System.out.println("잘못 입력했습니다. 다시 입력하시오.");
