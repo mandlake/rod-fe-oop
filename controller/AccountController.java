@@ -1,6 +1,6 @@
 package controller;
 
-import builder.AccountBuilder;
+import model.Account;
 import service.AccountService;
 import service.UtilService;
 import serviceImpl.AccountServiceImpl;
@@ -21,12 +21,11 @@ public class AccountController {
     public String createAccount(Scanner sc) {
         int id = util.createRandomInteger(0, 9999);
         return account.createAccount(
-                new AccountBuilder()
+                Account.builder()
                         .id(id)
                         .accountNumber(sc.next())
                         .accountHolder(sc.next())
                         .balance(sc.nextDouble())
-                        .transactionDate()
                         .build());
     }
     public String deposit(Scanner sc){

@@ -1,13 +1,13 @@
 package service;
 
-import model.MemberDTO;
+import model.Member;
 
 import java.util.List;
 import java.util.Map;
 
 public interface MemberService {
     String addMembers();
-    Map<String, MemberDTO> join(MemberDTO member);
+    Map<String, Member> join(Member member);
     String[] login(String username, String pw);
     String findMemberById(String username);
     void updatePassword(String username, String pw);

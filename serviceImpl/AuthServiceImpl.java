@@ -1,31 +1,27 @@
 package serviceImpl;
 
-import builder.MemberBuilder;
-import model.MemberDTO;
+import lombok.Getter;
+import model.Member;
 import service.AuthService;
 import service.UtilService;
-import serviceImpl.UtilServiceImpl;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class AuthServiceImpl implements AuthService {
+    @Getter
     private static AuthService instance = new AuthServiceImpl();
-    Map<String, MemberDTO> users;
+    Map<String, Member> users;
+    List<Member> memberList;
     private AuthServiceImpl(){
         this.users = new HashMap<>();
-    }
-
-    public static AuthService getInstance(){
-        return instance;
+        this.memberList = new ArrayList<>();
     }
 
     @Override
     public String join(Scanner sc) {
         System.out.println("id,비밀번호,비밀번호확인, 이름, 주민번호,전화번호,주소, 직업을 입력하십시오.");
 
-        MemberDTO member = new MemberBuilder()
+        Member member = Member.builder()
                 .username(sc.next())
                 .pw(sc.next())
                 .pwAgain(sc.next())
@@ -45,13 +41,13 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public String addUsers() {
-        Map<String, MemberDTO> map = new HashMap<>();
+        Map<String, Member> map = new HashMap<>();
         UtilService util = UtilServiceImpl.getInstance();
         String newUsername = util.createRandomUserName();
 
         for(int i = 0 ; i<5 ; i++){
             map.put(newUsername,
-                    new MemberBuilder()
+                    Member.builder()
                             .username(newUsername)
                             .pw("1")
                             .pwAgain("1")
@@ -62,13 +58,13 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public MemberDTO findUser(String username) {
-        MemberDTO user = new MemberBuilder().build();
+    public Member findUser(String username) {
+        Member user = Member.builder().build();
         return user;
     }
 
     @Override
-    public Map<String, MemberDTO> getUserMap() {
+    public Map<String, Member> getUserMap() {
         users.forEach((k, v) -> System.out.print("{" + k + ", " + v + "}"));
         return users;
     }

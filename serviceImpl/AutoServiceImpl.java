@@ -1,7 +1,6 @@
 package serviceImpl;
 
-import builder.MemberBuilder;
-import model.MemberDTO;
+import model.Member;
 import service.AutoService;
 import service.UtilService;
 
@@ -29,15 +28,15 @@ public class AutoServiceImpl implements AutoService {
     }
 
     @Override
-    public Map<String, MemberDTO> addMembers() {
-        Map<String, MemberDTO> map = new HashMap<>();
+    public Map<String, Member> addMembers() {
+        Map<String, Member> map = new HashMap<>();
         UtilService util = UtilServiceImpl.getInstance();
         for(int i = 0; i < 5; i++) {
             String username = util.createRandomUserName();
             String password = String.valueOf(util.createRandomInteger(1, 10));
 
             map.put(username,
-                    new MemberBuilder()
+                    Member.builder()
                             .username(username)
                             .pw(password)
                             .pwAgain(password)

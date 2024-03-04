@@ -1,7 +1,6 @@
 package view;
 
-import builder.MemberBuilder;
-import model.MemberDTO;
+import model.Member;
 import service.BmiService;
 import service.UtilService;
 import serviceImpl.BmiServiceImpl;
@@ -10,7 +9,7 @@ import serviceImpl.UtilServiceImpl;
 public class BmiView {
     public static void bmi() {
         UtilService random = UtilServiceImpl.getInstance();
-        MemberDTO person = new MemberBuilder()
+        Member person = Member.builder()
                 .height(random.createRandomDouble(150, 50))
                 .weight(random.createRandomDouble(30, 69))
                 .build();

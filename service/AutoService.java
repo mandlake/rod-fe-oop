@@ -1,12 +1,12 @@
 package service;
 
-import model.MemberDTO;
+import model.Member;
 
 import java.util.Map;
 
 public interface AutoService {
     String join();
     String login();
-    Map<String, MemberDTO> addMembers();
+    Map<String, Member> addMembers();
     void findMembers(String username);
 }

@@ -1,8 +1,8 @@
 package service;
 
-import model.MemberDTO;
+import model.Member;
 
 public interface BmiService {
-    String createBmi(MemberDTO member);
+    String createBmi(Member member);
     String createBodyMass(double bmi);
 }

@@ -1,20 +1,28 @@
 package serviceImpl;
 
-import model.MemberDTO;
+import lombok.Getter;
+import model.Member;
 import service.BmiService;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class BmiServiceImpl implements BmiService {
 
+    @Getter
     private static final BmiService instance = new BmiServiceImpl();
+    Map<String, ?> memberMap;
+    List<? extends Member> memberList;
 
-    private BmiServiceImpl(){}
-
-    public static BmiService getInstance() {
-        return instance;
+    private BmiServiceImpl(){
+        this.memberMap = new HashMap<>();
+        this.memberList = new ArrayList<>();
     }
 
     @Override
-    public String createBmi(MemberDTO member) {
+    public String createBmi(Member member) {
         return String.format(String.valueOf(0.1f), (member.getWeight())/((member.getHeight()/100) * (member.getHeight()/100)));
     }
 

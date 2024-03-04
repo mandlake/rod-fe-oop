@@ -1,6 +1,6 @@
 package controller;
 
-import model.MemberDTO;
+import model.Member;
 import service.AuthService;
 import serviceImpl.AuthServiceImpl;
 
@@ -34,7 +34,7 @@ public class AuthController {
         auth.findUser(username);
     }
 
-    public Map<String, MemberDTO> getUserMap() {
+    public Map<String, Member> getUserMap() {
         return auth.getUserMap();
     }
 

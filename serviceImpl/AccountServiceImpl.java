@@ -1,8 +1,7 @@
 package serviceImpl;
 
-import builder.AccountBuilder;
 import lombok.Getter;
-import model.AccountDTO;
+import model.Account;
 import service.AccountService;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 public class AccountServiceImpl implements AccountService {
-    Map<String, AccountDTO> accounts;
+    Map<String, Account> accounts;
 
     @Getter
     private static final AccountService instance = new AccountServiceImpl();
@@ -20,25 +19,24 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public String createAccount(AccountDTO account) {
+    public String createAccount(Account account) {
         accounts.put(account.getAccountNumber(), account);
         return "계좌가 생성되었습니다.";
     }
 
     @Override
     public String deposit(String accountNum, double balance) {
-        AccountDTO acc = accounts.get(accountNum);
+        Account acc = accounts.get(accountNum);
         String deposit;
         if(acc == null) {
             deposit = "안에 계좌가 없습니다.";
         } else {
             accounts.put(accountNum,
-                    new AccountBuilder()
+                    Account.builder()
                             .id(acc.getId())
                             .accountNumber(accountNum)
                             .accountHolder(acc.getAccountHolder())
                             .balance(acc.getBalance() + balance)
-                            .transactionDate()
                             .build());
             deposit = acc.getAccountHolder() + "님의 계좌에 돈이 " + balance + "만큼 입금되었습니다.";
         }
@@ -47,18 +45,17 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public String withdraw(String accountNum, double balance) {
-        AccountDTO acc = accounts.get(accountNum);
+        Account acc = accounts.get(accountNum);
         String deposit;
         if(acc == null) {
             deposit = "안에 계좌가 없습니다.";
         } else {
             accounts.put(accountNum,
-                    new AccountBuilder()
+                    Account.builder()
                             .id(acc.getId())
                             .accountNumber(accountNum)
                             .accountHolder(acc.getAccountHolder())
                             .balance(acc.getBalance() - balance)
-                            .transactionDate()
                             .build());
             deposit = acc.getAccountHolder() + "님의 계좌에 돈이 " + balance + "만큼 출금되었습니다.";
         }
@@ -83,7 +80,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public String cancelAccount(String accountNumber) {
-        AccountDTO acc = accounts.get(accountNumber);
+        Account acc = accounts.get(accountNumber);
         String deposit;
         if(acc == null) {
             deposit = "안에 계좌가 없습니다.";

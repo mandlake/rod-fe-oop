@@ -1,7 +1,6 @@
 package controller;
 
-import builder.MemberBuilder;
-import model.MemberDTO;
+import model.Member;
 import service.MemberService;
 import serviceImpl.MemberServiceImpl;
 
@@ -18,8 +17,8 @@ public class MemberController {
         return member.addMembers();
     }
 
-    public Map<String, MemberDTO> join(Scanner sc) {
-        MemberDTO mem = new MemberBuilder()
+    public Map<String, Member> join(Scanner sc) {
+        Member mem = Member.builder()
                 .username(sc.next())
                 .pw(sc.next())
                 .name(sc.next())

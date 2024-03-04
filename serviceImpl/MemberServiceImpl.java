@@ -1,15 +1,14 @@
 package serviceImpl;
 
-import builder.MemberBuilder;
 import lombok.Getter;
-import model.MemberDTO;
+import model.Member;
 import service.MemberService;
 import service.UtilService;
 
 import java.util.*;
 
 public class MemberServiceImpl implements MemberService {
-    Map<String, MemberDTO> users;
+    Map<String, Member> users;
 
     @Getter
     private static final MemberService instance = new MemberServiceImpl();
@@ -29,7 +28,7 @@ public class MemberServiceImpl implements MemberService {
             String job = String.valueOf(util.createRandomInteger(1, 10));
 
             users.put(username,
-                    new MemberBuilder()
+                    Member.builder()
                             .username(username)
                             .pw(password)
                             .name(util.createRandomName())
@@ -42,7 +41,7 @@ public class MemberServiceImpl implements MemberService {
         return users.size() + "명의 회원이 생성되었습니다.";
     }
     @Override
-    public Map<String, MemberDTO> join(MemberDTO member) {
+    public Map<String, Member> join(Member member) {
         users.put(member.getUsername(), member);
         return users;
     }
@@ -63,7 +62,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public String findMemberById(String username) {
-        MemberDTO user = users.get(username);
+        Member user = users.get(username);
         String Mem;
         if(user == null) {
             Mem = username + "에 해당하는 정보가 없습니다.";
@@ -75,14 +74,14 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public void updatePassword(String username, String pw) {
-        MemberDTO userWillChanged = users.get(username);
+        Member userWillChanged = users.get(username);
         String name = userWillChanged.getName();
         String personID = userWillChanged.getPersonId();
         String phoneNum = userWillChanged.getPhoneNumber();
         String address = userWillChanged.getAddress();
         String job = userWillChanged.getJob();
         users.put(username,
-                new MemberBuilder()
+                Member.builder()
                         .username(username)
                         .pw(pw)
                         .name(name)
