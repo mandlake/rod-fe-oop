@@ -34,7 +34,7 @@ public class AuthController {
         auth.findUser(username);
     }
 
-    public Map<String, Member> getUserMap() {
+    public Map<String, ?> getUserMap() {
         return auth.getUserMap();
     }
 

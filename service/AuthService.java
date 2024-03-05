@@ -10,7 +10,7 @@ public interface AuthService {
     String login();
     String addUsers();
     Member findUser (String username);
-    Map<String, Member> getUserMap();
+    Map<String, ?> getUserMap();
     String count();
 
 }

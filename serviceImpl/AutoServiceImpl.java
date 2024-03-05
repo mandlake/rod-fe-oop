@@ -1,5 +1,6 @@
 package serviceImpl;
 
+import lombok.Getter;
 import model.Member;
 import service.AutoService;
 import service.UtilService;
@@ -9,13 +10,10 @@ import java.util.Map;
 
 public class AutoServiceImpl implements AutoService {
 
+    @Getter
     private static final AutoService instance = new AutoServiceImpl();
 
     private AutoServiceImpl(){}
-
-    public static AutoService getInstance() {
-        return instance;
-    }
 
     @Override
     public String join() {

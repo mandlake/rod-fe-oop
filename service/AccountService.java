@@ -9,6 +9,6 @@ public interface AccountService {
     String deposit(String accountNum, double balance);
     String withdraw(String accountNum, double balance);
     String getBalance(String accountNumber);
-    List<String> getAccounts();
+    List<?> getAccounts();
     String cancelAccount(String accountNumber);
 }

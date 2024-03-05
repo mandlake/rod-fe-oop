@@ -43,7 +43,7 @@ public class AccountController {
         return account.getBalance(accountNumber);
     }
 
-    public List<String> getAccounts() {
+    public List<?> getAccounts() {
         return account.getAccounts();
     }
     public String cancelAccount(Scanner sc){
