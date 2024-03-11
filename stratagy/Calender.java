@@ -20,9 +20,7 @@ enum Week {
     WEDNESDAY("wednesday", ()-> "수요일"),
     THURSDAY("thursday", ()-> "목요일"),
     FRIDAY("friday", ()-> "금요일"),
-    SATURDAY("saturday", ()-> "토요일")
-
-    ;
+    SATURDAY("saturday", ()-> "토요일");
 
     private final String week;
     private final Supplier<String> supplier;
