@@ -30,8 +30,6 @@ public class MemberView {
                     return;
                 case "1":
                     System.out.println("=== 회원가입 ===");
-                    System.out.println("ID, 비밀번호, 이름, 주민번호," +
-                            " 전화번호, 주소, 직업을 입력해주세요");
                     ctrl.join(sc);
                     break;
                 case "2":
