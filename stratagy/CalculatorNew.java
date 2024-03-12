@@ -8,8 +8,8 @@ enum Operator {
     MULTIPLY("*", (num1, num2) -> num1 * num2),
     DIVIDE("/", (num1, num2) -> num1 / num2);
 
-    private String operator;
-    private BiFunction<Double, Double, Double> expression;
+    private final String operator;
+    private final BiFunction<Double, Double, Double> expression;
 
     Operator(String operator, BiFunction<Double, Double, Double> expression) {
         this.operator = operator;

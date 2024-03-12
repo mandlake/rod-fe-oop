@@ -21,7 +21,7 @@ enum Grade {
 
     private static Grade getOperator(int score) {
         return Arrays.stream(values())
-                .filter(g -> score >= g.score)
+                .filter(o -> score >= o.score)
                 .findFirst().orElse(F);
     }
 }
